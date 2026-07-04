@@ -1,12 +1,17 @@
 class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-     result = [0] * len(temperatures)
-     stack = []  # stores (temperature, index)
-    
-     for i, t in enumerate(temperatures):
-        while stack and t > stack[-1][0]:
-            _, stack_index = stack.pop()
-            result[stack_index] = i - stack_index
-        stack.append((t, i))
-    
-     return result        
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        cars = sorted(zip(position, speed), reverse=True)
+
+        fleets = 0
+        last_time = 0.0
+        for pos, spd in cars:
+            time = (target - pos) / spd
+
+            if time > last_time:
+                fleets += 1
+                last_time = time
+
+
+        return fleets
+
+        
